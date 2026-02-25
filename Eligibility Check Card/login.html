@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | Simply Medical Cards</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Premium Google Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Inter:wght@400;500;600&display=swap"
+        rel="stylesheet">
+
+    <style>
+        /* Scoped styles for the login component */
+        .smc-login-component {
+            --smc-vibrant-green: #48bb2b;
+            --smc-icon-yellow: #f1c40f;
+            --smc-text-black: #1a1a1a;
+            --smc-text-gray: #666;
+            --smc-bg-light: #f9fbf9;
+            --smc-border-radius: 40px;
+            --smc-shadow: 0 15px 45px rgba(0, 0, 0, 0.08);
+
+            font-family: 'Outfit', sans-serif;
+            color: var(--smc-text-black);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--smc-bg-light) 0%, #ffffff 100%);
+        }
+
+        .smc-login-component .login-card {
+            background: #fff;
+            border-radius: 30px;
+            box-shadow: var(--smc-shadow);
+            border: 1px solid #eee;
+            overflow: hidden;
+            display: flex;
+            flex-wrap: wrap;
+            max-width: 900px;
+            width: 100%;
+        }
+
+        /* Left Sidebar - Branding */
+        .smc-login-component .brand-sidebar {
+            flex: 1 1 350px;
+            background-color: var(--smc-bg-light);
+            background-image: url('data:image/svg+xml,%3Csvg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"%3E%3Cpath d="M50 0 C60 20 80 30 100 30 L100 70 C80 70 60 80 50 100 C40 80 20 70 0 70 L0 30 C20 30 40 20 50 0 Z" fill="%2348bb2b" fill-opacity="0.03"/%3E%3C/svg%3E');
+            padding: 60px 40px;
+            display: flex;
+            flex-direction: column;
+            gap: 35px;
+            border-right: 1px solid #eee;
+        }
+
+        .smc-login-component .brand-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 30px;
+        }
+
+        .smc-login-component .logo-icon {
+            width: 48px;
+            height: 48px;
+            background-color: var(--smc-vibrant-green);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            flex-shrink: 0;
+            font-weight: 700;
+            font-size: 1.5rem;
+        }
+
+        .smc-login-component .logo-text {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--smc-text-black);
+        }
+
+        .smc-login-component .brand-title {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .smc-login-component .brand-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background-color: var(--smc-vibrant-green);
+        }
+
+        .smc-login-component .brand-description {
+            color: var(--smc-text-gray);
+            font-size: 0.95rem;
+            line-height: 1.8;
+            margin-bottom: 30px;
+        }
+
+        .smc-login-component .benefit-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .smc-login-component .benefit-icon {
+            width: 24px;
+            height: 24px;
+            background-color: var(--smc-icon-yellow);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            flex-shrink: 0;
+            font-size: 0.8rem;
+        }
+
+        .smc-login-component .benefit-text {
+            color: var(--smc-text-gray);
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .smc-login-component .brand-footer {
+            pt: 4;
+            margin-top: auto;
+            border-top: 1px solid #eee;
+            padding-top: 20px;
+        }
+
+        .smc-login-component .brand-footer p {
+            font-size: 0.85rem;
+            color: var(--smc-text-gray);
+            margin-bottom: 0;
+        }
+
+        /* Login Form Container */
+        .smc-login-component .form-wrapper {
+            flex: 1 1 350px;
+            padding: 60px 50px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .smc-login-component .form-header {
+            margin-bottom: 40px;
+        }
+
+        .smc-login-component .form-title {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .smc-login-component .form-title::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 40px;
+            height: 3px;
+            background-color: var(--smc-vibrant-green);
+        }
+
+        .smc-login-component .form-subtitle {
+            color: var(--smc-text-gray);
+            font-size: 0.95rem;
+            margin-top: 20px;
+        }
+
+        /* Form Controls */
+        .smc-login-component .form-control,
+        .smc-login-component .form-select {
+            border: 1px solid #eaeaea;
+            border-radius: 50px;
+            padding: 15px 25px;
+            font-size: 0.95rem;
+            background-color: #fdfdfd;
+            transition: all 0.3s ease;
+            margin-bottom: 20px;
+        }
+
+        .smc-login-component .form-control:focus,
+        .smc-login-component .form-select:focus {
+            background-color: #fff;
+            border-color: var(--smc-vibrant-green);
+            box-shadow: 0 0 0 5px rgba(72, 187, 43, 0.05);
+            outline: none;
+        }
+
+        .smc-login-component .form-control::placeholder {
+            color: #ccc;
+            font-weight: 500;
+        }
+
+        /* Remember Me & Forgot Password */
+        .smc-login-component .form-checkbox {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 20px;
+            font-size: 0.9rem;
+        }
+
+        .smc-login-component .form-checkbox input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            accent-color: var(--smc-vibrant-green);
+            cursor: pointer;
+        }
+
+        .smc-login-component .form-checkbox label {
+            margin-bottom: 0;
+            cursor: pointer;
+            color: var(--smc-text-gray);
+        }
+
+        .smc-login-component .forgot-password {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .smc-login-component .forgot-link {
+            color: var(--smc-vibrant-green);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .smc-login-component .forgot-link:hover {
+            color: var(--smc-icon-yellow);
+        }
+
+        /* Login Button */
+        .smc-login-component .login-btn {
+            background-color: var(--smc-vibrant-green);
+            color: #fff;
+            border: none;
+            border-radius: 50px;
+            padding: 15px 40px;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 10px 20px rgba(72, 187, 43, 0.2);
+            width: 100%;
+            margin-bottom: 20px;
+        }
+
+        .smc-login-component .login-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(241, 196, 15, 0.4);
+            background-color: var(--smc-icon-yellow);
+            color: var(--smc-text-black);
+        }
+
+        /* Signup Link */
+        .smc-login-component .signup-section {
+            text-align: center;
+            border-top: 1px solid #eee;
+            padding-top: 20px;
+        }
+
+        .smc-login-component .signup-text {
+            color: var(--smc-text-gray);
+            font-size: 0.9rem;
+            margin-bottom: 0;
+        }
+
+        .smc-login-component .signup-link {
+            color: var(--smc-vibrant-green);
+            text-decoration: none;
+            font-weight: 700;
+            transition: all 0.3s ease;
+        }
+
+        .smc-login-component .signup-link:hover {
+            color: var(--smc-icon-yellow);
+            text-decoration: underline;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .smc-login-component .login-card {
+                flex-direction: column;
+            }
+
+            .smc-login-component .brand-sidebar {
+                border-right: none;
+                border-bottom: 1px solid #eee;
+                padding: 40px 30px;
+            }
+
+            .smc-login-component .form-wrapper {
+                padding: 40px 30px;
+            }
+
+            .smc-login-component .form-title {
+                font-size: 1.7rem;
+            }
+
+            .smc-login-component .brand-title {
+                font-size: 1.7rem;
+            }
+        }
+    </style>
+</head>
+
+<body style="margin: 0; padding: 0;">
+
+    <div class="smc-login-component">
+        <div class="login-card">
+
+            <!-- LEFT SIDEBAR: BRANDING -->
+            <div class="brand-sidebar">
+                <div>
+                    <div class="brand-logo">
+                        <div class="logo-icon">S</div>
+                        <span class="logo-text">Simply</span>
+                    </div>
+                    <h2 class="brand-title" style="margin-top: 30px;">Secure Access</h2>
+                    <p class="brand-description">Access your Simply Medical Cards account to manage your eligibility
+                        status and medical documents.</p>
+                </div>
+
+                <div>
+                    <div class="benefit-item">
+                        <div class="benefit-icon">✓</div>
+                        <div class="benefit-text">Real-time eligibility tracking and updates</div>
+                    </div>
+                    <div class="benefit-item">
+                        <div class="benefit-icon">✓</div>
+                        <div class="benefit-text">Secure document storage and access</div>
+                    </div>
+                    <div class="benefit-item">
+                        <div class="benefit-icon">✓</div>
+                        <div class="benefit-text">HIPAA compliant and fully encrypted</div>
+                    </div>
+                    <div class="benefit-item">
+                        <div class="benefit-icon">✓</div>
+                        <div class="benefit-text">Priority customer support available 24/7</div>
+                    </div>
+                </div>
+
+                <div class="brand-footer">
+                    <p>Your privacy and security are our top priorities. All data is encrypted and secure.</p>
+                </div>
+            </div>
+
+            <!-- RIGHT SIDE: LOGIN FORM -->
+            <div class="form-wrapper">
+                <div class="form-header">
+                    <h1 class="form-title">Login</h1>
+                    <p class="form-subtitle">Enter your credentials to access your account</p>
+                </div>
+
+                <form id="loginForm">
+                    <!-- Email Input -->
+                    <div>
+                        <input type="email" name="email" class="form-control" placeholder="Email Address" required>
+                    </div>
+
+                    <!-- Password Input -->
+                    <div>
+                        <input type="password" name="password" class="form-control" placeholder="Password" required>
+                    </div>
+
+                    <!-- Remember Me & Forgot Password -->
+                    <div class="forgot-password">
+                        <div class="form-checkbox">
+                            <input type="checkbox" id="rememberMe" name="rememberMe">
+                            <label for="rememberMe">Remember me</label>
+                        </div>
+                        <a href="#" class="forgot-link">Forgot Password?</a>
+                    </div>
+
+                    <!-- Login Button -->
+                    <button type="submit" class="login-btn" id="loginBtn">
+                        <span class="btn-text">Sign In</span>
+                        <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd"
+                                d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z" />
+                        </svg>
+                    </button>
+                </form>
+
+                <!-- Signup Section -->
+                <div class="signup-section">
+                    <p class="signup-text">Don't have an account? <a href="#" class="signup-link">Sign Up</a></p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Bootstrap 5 Bundle JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const btn = document.getElementById('loginBtn');
+            const btnText = btn.querySelector('.btn-text');
+
+            btn.style.opacity = '0.8';
+            btn.style.pointerEvents = 'none';
+            btnText.textContent = 'Signing In...';
+
+            // Simulate login process
+            setTimeout(() => {
+                // Replace with actual login logic
+                alert('Login successful! Redirecting to dashboard...');
+                // window.location.href = 'dashboard.html';
+                btn.style.opacity = '1';
+                btn.style.pointerEvents = 'auto';
+                btnText.textContent = 'Sign In';
+            }, 1500);
+        });
+    </script>
+</body>
+
+</html>
