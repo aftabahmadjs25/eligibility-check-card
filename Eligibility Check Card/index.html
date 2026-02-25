@@ -304,7 +304,6 @@
                 </div>
             </div>
 
-            <!-- FORM CONTAINER: GENERAL QUERY (ELIGIBILITY) -->
             <div class="form-container">
                 <div>
                     <h3 class="form-section-title">Eligibility Check</h3>
@@ -413,17 +412,15 @@
 
     <script>
         document.getElementById('eligibilityForm').addEventListener('submit', function (e) {
-            e.preventDefault(); // Prevent standard form transaction to avoid "Resubmission" popups
+            e.preventDefault();
 
             const btn = document.getElementById('submitBtn');
             const btnText = btn.querySelector('.btn-text');
 
-            // Visual feedback
             btn.style.opacity = '0.8';
             btn.style.pointerEvents = 'none';
             btnText.textContent = 'Processing...';
 
-            // Smooth redirect after processing animation
             setTimeout(() => {
                 window.location.href = 'thankyou.html';
             }, 800);
